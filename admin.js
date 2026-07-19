@@ -1,3 +1,4 @@
+alert("Admin JS Loaded");
 import { db } from "./firebase.js";
 import {
   ref,
