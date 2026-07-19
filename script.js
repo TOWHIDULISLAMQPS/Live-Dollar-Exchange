@@ -461,3 +461,93 @@ if(year){
 year.innerHTML=new Date().getFullYear();
 
 }
+// ===================================
+// Page Fade Animation
+// ===================================
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.style.opacity = "0";
+
+    setTimeout(() => {
+        document.body.style.transition = "opacity .6s ease";
+        document.body.style.opacity = "1";
+    }, 100);
+});
+
+// ===================================
+// Button Hover Scale
+// ===================================
+
+document.querySelectorAll(".btn").forEach(btn => {
+
+    btn.addEventListener("mouseenter", () => {
+        btn.style.transform = "scale(1.05)";
+    });
+
+    btn.addEventListener("mouseleave", () => {
+        btn.style.transform = "scale(1)";
+    });
+
+});
+
+// ===================================
+// Navbar Background On Scroll
+// ===================================
+
+window.addEventListener("scroll", () => {
+
+    const nav = document.querySelector(".navbar");
+
+    if (!nav) return;
+
+    if (window.scrollY > 100) {
+
+        nav.style.background = "#ffffff";
+        nav.style.transition = ".3s";
+
+    } else {
+
+        nav.style.background = "";
+
+    }
+
+});
+
+// ===================================
+// Hero Text Animation
+// ===================================
+
+const heroTitle = document.querySelector(".hero h1");
+
+if(heroTitle){
+
+const words=[
+"Fast Dollar Exchange",
+"Trusted Exchange Service",
+"Buy & Sell USD",
+"Secure Online Exchange"
+];
+
+let i=0;
+
+setInterval(()=>{
+
+heroTitle.innerHTML=words[i];
+
+i++;
+
+if(i>=words.length){
+
+i=0;
+
+}
+
+},4000);
+
+}
+
+// ===================================
+// Console Welcome
+// ===================================
+
+console.log("Welcome to TS Dollar Exchange");
