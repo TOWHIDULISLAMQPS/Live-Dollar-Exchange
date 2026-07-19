@@ -11,7 +11,7 @@ import {
     getAuth,
     signInWithEmailAndPassword
 }
-https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js
+https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js
 
 
 window.login = function(){
