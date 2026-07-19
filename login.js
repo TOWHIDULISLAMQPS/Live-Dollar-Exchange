@@ -3,15 +3,14 @@
 // Admin Login JS
 // ===================================
 
-
 import { auth } from "./firebase.js";
 
-
 import {
-    getAuth,
     signInWithEmailAndPassword
 }
-https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js
+from
+"https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
 
 
 window.login = function(){
@@ -22,7 +21,6 @@ let email = document.getElementById("email").value;
 let password = document.getElementById("password").value;
 
 
-
 if(email==="" || password===""){
 
 document.getElementById("msg").innerHTML =
@@ -31,7 +29,6 @@ document.getElementById("msg").innerHTML =
 return;
 
 }
-
 
 
 signInWithEmailAndPassword(auth,email,password)
