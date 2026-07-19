@@ -1,3 +1,4 @@
+console.log("Login JS Connected");
 // ===================================
 // TS Dollar Exchange
 // Admin Login JS
