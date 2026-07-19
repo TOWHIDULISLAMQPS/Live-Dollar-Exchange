@@ -1,4 +1,3 @@
-console.log("Login JS Connected");
 // ===================================
 // TS Dollar Exchange
 // Admin Login JS
@@ -12,8 +11,7 @@ import {
     getAuth,
     signInWithEmailAndPassword
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js
 
 
 
