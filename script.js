@@ -551,3 +551,161 @@ i=0;
 // ===================================
 
 console.log("Welcome to TS Dollar Exchange");
+// ======================================
+// Reveal Animation On Scroll
+// ======================================
+
+const revealElements = document.querySelectorAll(".feature-card, .wallet-box, .rate-card, .review-card");
+
+function revealOnScroll() {
+
+    const windowHeight = window.innerHeight;
+
+    revealElements.forEach(el => {
+
+        const top = el.getBoundingClientRect().top;
+
+        if (top < windowHeight - 100) {
+
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+
+        }
+
+    });
+
+}
+
+revealElements.forEach(el => {
+
+    el.style.opacity = "0";
+    el.style.transform = "translateY(50px)";
+    el.style.transition = "all .7s ease";
+
+});
+
+window.addEventListener("scroll", revealOnScroll);
+
+revealOnScroll();
+
+
+// ======================================
+// Random Exchange ID Generator
+// ======================================
+
+function generateExchangeID(){
+
+const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+let id="TS-";
+
+for(let i=0;i<8;i++){
+
+id+=chars.charAt(Math.floor(Math.random()*chars.length));
+
+}
+
+return id;
+
+}
+
+console.log("Exchange ID:",generateExchangeID());
+
+
+// ======================================
+// Live Clock
+// ======================================
+
+function liveClock(){
+
+const clock=document.getElementById("liveClock");
+
+if(!clock) return;
+
+const now=new Date();
+
+clock.innerHTML=now.toLocaleTimeString();
+
+}
+
+setInterval(liveClock,1000);
+
+
+// ======================================
+// Auto Change Hero Background
+// ======================================
+
+const hero=document.querySelector(".hero");
+
+const heroImages=[
+
+"https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1800&q=80",
+
+"https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1800&q=80",
+
+"https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1800&q=80"
+
+];
+
+let bgIndex=0;
+
+setInterval(()=>{
+
+if(hero){
+
+bgIndex++;
+
+if(bgIndex>=heroImages.length){
+
+bgIndex=0;
+
+}
+
+hero.style.backgroundImage=
+`linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),url(${heroImages[bgIndex]})`;
+
+}
+
+},8000);
+
+
+// ======================================
+// Disable Right Click
+// ======================================
+
+document.addEventListener("contextmenu",function(e){
+
+e.preventDefault();
+
+});
+
+
+// ======================================
+// Disable F12 & Developer Shortcut
+// ======================================
+
+document.addEventListener("keydown",function(e){
+
+if(
+e.key==="F12" ||
+(e.ctrlKey && e.shiftKey && e.key==="I") ||
+(e.ctrlKey && e.shiftKey && e.key==="J") ||
+(e.ctrlKey && e.key==="U")
+){
+
+e.preventDefault();
+
+}
+
+});
+
+
+// ======================================
+// Welcome Popup
+// ======================================
+
+setTimeout(()=>{
+
+showNotification("Welcome to TS Dollar Exchange");
+
+},2000);
