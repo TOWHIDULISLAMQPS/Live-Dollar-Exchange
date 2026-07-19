@@ -102,3 +102,4 @@ showRate(data);
         "Last Update : " + data.updatedAt;
 
 }
+console.log("Admin JS Loaded");
