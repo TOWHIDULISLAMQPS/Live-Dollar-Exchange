@@ -6,12 +6,8 @@
 import { auth } from "./firebase.js";
 
 import {
-    signInWithEmailAndPassword
-}
-from
-"https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-
-
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 window.login = function(){
 
