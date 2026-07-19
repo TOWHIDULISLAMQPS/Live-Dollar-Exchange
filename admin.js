@@ -1,9 +1,9 @@
 import { db } from "./firebase.js";
-
 import {
   ref,
-  set
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+  set,
+  get
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
 
 window.saveRate = async function () {
 
@@ -106,4 +106,4 @@ function showRate(data) {
     }
 
 }
-console.lrHonsoleonsole.log("Admin JS Loaded");
+console.log("Admin JS Loaded");
