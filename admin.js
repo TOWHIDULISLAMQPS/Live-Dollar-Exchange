@@ -91,8 +91,7 @@ document
     .addEventListener("change", loadRate);
 function showRate(data) {
 
-    document.getElementById("buyRate").value = data.buyRate;
-    document.getElementById("sellRate").value = data.sellRate;
+showRate(data);
 
     document.getElementById("lastUpdate").innerHTML =
         "Last Update : " + data.updatedAt;
