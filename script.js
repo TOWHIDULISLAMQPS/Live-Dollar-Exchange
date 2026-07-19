@@ -290,3 +290,174 @@ form.reset();
 });
 
 }
+// ===================================
+// Active Navigation Menu
+// ===================================
+
+const navLinks = document.querySelectorAll(".nav-link");
+
+navLinks.forEach(link => {
+
+link.addEventListener("click", function(){
+
+navLinks.forEach(item=>item.classList.remove("active"));
+
+this.classList.add("active");
+
+});
+
+});
+
+// ===================================
+// Button Ripple Effect
+// ===================================
+
+document.querySelectorAll(".btn").forEach(btn=>{
+
+btn.addEventListener("click",function(e){
+
+const circle=document.createElement("span");
+
+const x=e.clientX-this.offsetLeft;
+
+const y=e.clientY-this.offsetTop;
+
+circle.style.left=x+"px";
+
+circle.style.top=y+"px";
+
+circle.classList.add("ripple");
+
+this.appendChild(circle);
+
+setTimeout(()=>{
+
+circle.remove();
+
+},600);
+
+});
+
+});
+
+// ===================================
+// Number Counter Animation
+// ===================================
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const nums=entry.target.querySelectorAll(".counter");
+
+nums.forEach(num=>{
+
+let target=parseInt(num.dataset.target);
+
+let count=0;
+
+let speed=target/100;
+
+const update=()=>{
+
+count+=speed;
+
+if(count<target){
+
+num.innerHTML=Math.floor(count);
+
+requestAnimationFrame(update);
+
+}else{
+
+num.innerHTML=target;
+
+}
+
+};
+
+update();
+
+});
+
+observer.unobserve(entry.target);
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".stats").forEach(sec=>{
+
+observer.observe(sec);
+
+});
+
+// ===================================
+// Fake Recent Exchange Notification
+// ===================================
+
+const customers=[
+
+"Rahim",
+
+"Karim",
+
+"Hasan",
+
+"Jahid",
+
+"Sakib",
+
+"Rakib",
+
+"Tanvir",
+
+"Naim"
+
+];
+
+const wallets=[
+
+"Payoneer",
+
+"Wise",
+
+"USDT",
+
+"Skrill"
+
+];
+
+function randomNotification(){
+
+const name=customers[Math.floor(Math.random()*customers.length)];
+
+const wallet=wallets[Math.floor(Math.random()*wallets.length)];
+
+const amount=Math.floor(Math.random()*400)+50;
+
+showNotification(
+
+`${name} exchanged ${amount} USD via ${wallet}`
+
+);
+
+}
+
+setInterval(randomNotification,25000);
+
+// ===================================
+// Footer Year
+// ===================================
+
+const year=document.getElementById("year");
+
+if(year){
+
+year.innerHTML=new Date().getFullYear();
+
+}
