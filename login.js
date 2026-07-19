@@ -4,7 +4,7 @@
 // ===================================
 
 
-import { app } from "./firebase.js";
+import { auth } from "./firebase.js";
 
 
 import {
@@ -12,11 +12,6 @@ import {
     signInWithEmailAndPassword
 }
 https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js
-
-
-
-const auth = getAuth(app);
-
 
 
 window.login = function(){
