@@ -1,8 +1,13 @@
+/* ===========================
+TS Dollar Exchange
+Premium Style.css
+Part 1
+=========================== */
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
 }
 
 html{
@@ -10,243 +15,163 @@ scroll-behavior:smooth;
 }
 
 body{
+font-family:'Poppins',sans-serif;
 background:#f5f7fb;
 color:#222;
+overflow-x:hidden;
 }
 
-header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-background:#fff;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 8%;
-box-shadow:0 2px 15px rgba(0,0,0,.08);
-z-index:999;
+/* Top Bar */
+
+.top-bar{
+background:#0d6efd;
+color:#fff;
+padding:10px 0;
+font-size:14px;
 }
 
-.logo h2{
-color:#1d4ed8;
+/* Navbar */
+
+.navbar{
+padding:18px 0;
+transition:.3s;
+}
+
+.navbar-brand{
 font-size:30px;
 font-weight:700;
 }
 
-nav{
-display:flex;
-align-items:center;
-gap:28px;
-}
-
-nav a{
-text-decoration:none;
-color:#333;
-font-weight:600;
+.nav-link{
+font-weight:500;
+margin-left:20px;
 transition:.3s;
 }
 
-nav a:hover{
-color:#2563eb;
+.nav-link:hover{
+color:#0d6efd!important;
 }
 
-.login-btn{
-background:#2563eb;
-color:#fff!important;
-padding:10px 24px;
-border-radius:8px;
-}
+/* Hero */
 
 .hero{
-height:100vh;
-background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
-url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80");
+
+background:linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
+url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1800&q=80");
+
 background-size:cover;
+
 background-position:center;
+
+min-height:100vh;
+
 display:flex;
-justify-content:center;
+
 align-items:center;
-text-align:center;
-padding:20px;
-}
 
-.overlay{
-max-width:900px;
-}
-
-.overlay h1{
-font-size:56px;
 color:#fff;
+
+}
+
+.hero h1{
+
+font-size:60px;
+
+font-weight:800;
+
 margin-bottom:20px;
+
 }
 
-.overlay p{
-font-size:22px;
-color:#eee;
-margin-bottom:35px;
-line-height:1.6;
+.hero p{
+
+font-size:20px;
+
+line-height:1.8;
+
+margin-bottom:30px;
+
+max-width:600px;
+
 }
 
-.overlay button{
-background:#16a34a;
-color:#fff;
-border:none;
-padding:16px 45px;
+.hero .btn{
+
+padding:15px 35px;
+
 font-size:18px;
-border-radius:10px;
-cursor:pointer;
-transition:.3s;
-}
 
-.overlay button:hover{
-background:#15803d;
-}
-
-.exchange-box{
-width:92%;
-max-width:1200px;
-margin:-80px auto 80px;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:25px;
-position:relative;
-z-index:10;
-}
-
-.card{
-background:#fff;
-padding:30px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-
-.card h2{
-margin-bottom:20px;
-font-size:24px;
-}
-
-.card select,
-.card input{
-width:100%;
-padding:15px;
-margin-bottom:18px;
-border:1px solid #ddd;
-border-radius:8px;
-font-size:16px;
-}
-
-.track button{
-width:100%;
-padding:15px;
-background:#2563eb;
-color:#fff;
-border:none;
-border-radius:8px;
-font-size:17px;
-cursor:pointer;
-}
-
-.track button:hover{
-background:#1d4ed8;
-}
-
-@media(max-width:992px){
-
-header{
-flex-direction:column;
-gap:15px;
-}
-
-nav{
-flex-wrap:wrap;
-justify-content:center;
-}
-
-.overlay h1{
-font-size:40px;
-}
-
-.exchange-box{
-grid-template-columns:1fr;
-margin-top:-40px;
-}
-
-}
-
-@media(max-width:600px){
-
-.overlay h1{
-font-size:32px;
-}
-
-.overlay p{
-font-size:18px;
-}
-
-header{
-padding:15px;
-}
-
-}
-.rates{
-width:90%;
-max-width:1200px;
-margin:60px auto;
-background:#fff;
-padding:30px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.rates h2{
-margin-bottom:20px;
-text-align:center;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-table th,
-table td{
-padding:15px;
-border-bottom:1px solid #ddd;
-text-align:center;
-}
-
-table th{
-background:#2563eb;
-color:#fff;
-}
-
-.latest{
-width:90%;
-max-width:1200px;
-margin:50px auto;
-}
-
-.latest h2{
-text-align:center;
-margin-bottom:25px;
-}
-
-.latest-box{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
-
-.latest-box div{
-background:#fff;
-padding:20px;
 border-radius:12px;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
+
 }
 
-@media(max-width:768px){
-.latest-box{
-grid-template-columns:1fr;
+/* Exchange Card */
+
+.exchange-card{
+
+background:#fff;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 20px 60px rgba(0,0,0,.15);
+
+color:#222;
+
 }
+
+.exchange-card h3{
+
+text-align:center;
+
+margin-bottom:25px;
+
+font-weight:700;
+
+}
+
+.exchange-card input,
+.exchange-card select{
+
+height:55px;
+
+border-radius:10px;
+
+}
+
+.exchange-card button{
+
+height:55px;
+
+border-radius:10px;
+
+font-size:18px;
+
+font-weight:600;
+
+}
+
+/* Section */
+
+section{
+
+padding:80px 0;
+
+}
+
+section h2{
+
+font-size:42px;
+
+font-weight:700;
+
+margin-bottom:15px;
+
+}
+
+section p{
+
+color:#666;
+
 }
