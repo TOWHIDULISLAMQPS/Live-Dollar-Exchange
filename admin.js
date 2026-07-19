@@ -96,10 +96,14 @@ document
     .addEventListener("change", loadRate);
 function showRate(data) {
 
-showRate(data);
+    document.getElementById("buyRate").value = data.buyRate;
+    document.getElementById("sellRate").value = data.sellRate;
 
-    document.getElementById("lastUpdate").innerHTML =
-        "Last Update : " + data.updatedAt;
+    const lastUpdate = document.getElementById("lastUpdate");
+
+    if (lastUpdate) {
+        lastUpdate.innerHTML = "Last Update : " + data.updatedAt;
+    }
 
 }
-console.log("Admin JS Loaded");
+console.lrHonsoleonsole.log("Admin JS Loaded");
