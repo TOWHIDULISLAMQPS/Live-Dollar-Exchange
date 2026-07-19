@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Towhid Exchange</title>
-<link rel="stylesheet" href="style.css">
+<title>TS Dollar Exchange</title>
 
 <link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -14,77 +18,114 @@
 
 <header>
 
-<h1>Towhid Exchange</h1>
+<div class="logo">
 
-<p>Buy & Sell Dollar Securely</p>
+<h2>TS Dollar Exchange</h2>
 
-</header>
+</div>
 
 <nav>
 
 <a href="#">Home</a>
 
+<a href="#">Exchange</a>
+
 <a href="#">Rates</a>
 
-<a href="#">Services</a>
+<a href="#">Track</a>
 
 <a href="#">Contact</a>
 
+<a class="login-btn" href="admin.html">Login</a>
+
 </nav>
+
+</header>
 
 <section class="hero">
 
-<h2>Trusted Dollar Exchange Service</h2>
+<div class="overlay">
 
-<p>Payoneer • Wise • Skrill • Neteller • USDT</p>
+<h1>Trusted Dollar Exchange Platform</h1>
 
-<button>Exchange Now</button>
+<p>
+Buy & Sell USD, Payoneer, Wise, Skrill,
+Perfect Money, USDT and more securely.
+</p>
 
-</section>
+<a href="#exchange">
 
-<section class="rate-box">
+<button>
 
-<h2>Today's Rate</h2>
+Exchange Now
 
-<div class="rate">
+</button>
 
-<div>
-
-<h3>Buy</h3>
-
-<span id="buyRate">৳122.00</span>
-
-</div>
-
-<div>
-
-<h3>Sell</h3>
-
-<span id="sellRate">৳123.50</span>
-
-</div>
+</a>
 
 </div>
 
 </section>
 
-<section class="calculator">
+<section id="exchange" class="exchange-box">
 
-<h2>Dollar Calculator</h2>
+<div class="card">
 
-<input type="number" id="usd" placeholder="USD">
+<h2>You Send</h2>
 
-<button onclick="calculate()">Calculate</button>
+<select>
 
-<h3 id="result"></h3>
+<option>Choose Wallet</option>
+
+<option>Payoneer</option>
+
+<option>Wise</option>
+
+<option>USDT</option>
+
+<option>Skrill</option>
+
+<option>Perfect Money</option>
+
+</select>
+
+<input type="number" placeholder="Amount">
+
+</div>
+
+<div class="card">
+
+<h2>You Receive</h2>
+
+<select>
+
+<option>bKash</option>
+
+<option>Nagad</option>
+
+<option>Bank</option>
+
+</select>
+
+<input type="number" placeholder="Receive Amount">
+
+</div>
+
+<div class="card track">
+
+<h2>Track Order</h2>
+
+<input type="text" placeholder="Exchange ID">
+
+<button>
+
+Track Now
+
+</button>
+
+</div>
 
 </section>
-
-<footer>
-
-© 2026 Towhid Exchange
-
-</footer>
 
 <script src="script.js"></script>
 
