@@ -709,3 +709,99 @@ setTimeout(()=>{
 showNotification("Welcome to TS Dollar Exchange");
 
 },2000);
+// ===================================
+// Firebase Live Rate Update
+// ===================================
+
+
+import("./firebase.js").then((module)=>{
+
+
+const db = module.db;
+
+
+import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js")
+.then(({ref,onValue})=>{
+
+
+// Payoneer Rate
+
+onValue(ref(db,"rates/payoneer"),(snapshot)=>{
+
+
+let data=snapshot.val();
+
+
+if(data){
+
+
+document.getElementById("payoneerBuy").innerHTML =
+data.buy;
+
+
+document.getElementById("payoneerSell").innerHTML =
+data.sell;
+
+
+}
+
+
+});
+
+
+
+// Wise Rate
+
+onValue(ref(db,"rates/wise"),(snapshot)=>{
+
+
+let data=snapshot.val();
+
+
+if(data){
+
+
+document.getElementById("wiseBuy").innerHTML =
+data.buy;
+
+
+document.getElementById("wiseSell").innerHTML =
+data.sell;
+
+
+}
+
+
+});
+
+
+
+// USDT Rate
+
+onValue(ref(db,"rates/usdt"),(snapshot)=>{
+
+
+let data=snapshot.val();
+
+
+if(data){
+
+
+document.getElementById("usdtBuy").innerHTML =
+data.buy;
+
+
+document.getElementById("usdtSell").innerHTML =
+data.sell;
+
+
+}
+
+
+});
+
+
+});
+
+
+});
