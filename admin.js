@@ -30,6 +30,11 @@ window.saveRate = async function () {
             updatedAt: new Date().toLocaleString()
 
         });
+      showRate({
+    buyRate: Number(buyRate),
+    sellRate: Number(sellRate),
+    updatedAt: new Date().toLocaleString()
+});
 
         message.innerHTML = "✅ Rate Saved Successfully";
         message.style.color = "green";
