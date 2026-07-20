@@ -731,3 +731,13 @@ onValue(ref(db, "exchangeRates/usdt"), (snapshot) => {
     document.getElementById("usdtSell").textContent = data.sellRate;
 
 });
+onValue(ref(db, "exchangeRates/skrill"), (snapshot) => {
+
+    const data = snapshot.val();
+
+    if (data) {
+        document.getElementById("skrillBuy").innerHTML = data.buyRate;
+        document.getElementById("skrillSell").innerHTML = data.sellRate;
+    }
+
+});
