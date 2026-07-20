@@ -748,7 +748,7 @@ data.sell;
 
 });
 
-
+currentRate = Number(data.buy);
 
 // Wise Rate
 
