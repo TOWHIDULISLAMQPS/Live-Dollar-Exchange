@@ -1,4 +1,4 @@
-let currentRate = 122;
+let currentRate = 0;
 // ===================================
 // TS Dollar Exchange
 // script.js Part 1
@@ -726,7 +726,7 @@ import("https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js")
 
 // Payoneer Rate
 
-onValue(ref(db,"rates/payoneer"),(snapshot)=>{
+onValue(ref(db,"exchangeRates/payoneer"),...
 
 
 let data=snapshot.val();
@@ -735,25 +735,18 @@ let data=snapshot.val();
 if(data){
 
 
-document.getElementById("payoneerBuy").innerHTML =
-data.buy;
+document.getElementById("payoneerBuy").innerHTML = data.buyRate;
 
+document.getElementById("payoneerSell").innerHTML = data.sellRate;
 
-document.getElementById("payoneerSell").innerHTML =
-data.sell;
-
-
-}
-
-
-});
-
-currentRate = Number(data.buy);
+currentRate = Number(data.buyRate);
 
 // Wise Rate
 
-onValue(ref(db,"rates/wise"),(snapshot)=>{
+onValue(ref(db,"exchangeRates/wise"),(snapshot)=>{
+data.buyRate
 
+data.sellRate
 
 let data=snapshot.val();
 
@@ -778,8 +771,10 @@ data.sell;
 
 // USDT Rate
 
-onValue(ref(db,"rates/usdt"),(snapshot)=>{
+onValue(ref(db,"exchangeRates/usdt"),(snapshot)=>{
+data.buyRate
 
+data.sellRate
 
 let data=snapshot.val();
 
