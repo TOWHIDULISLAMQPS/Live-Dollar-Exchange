@@ -22,7 +22,7 @@ window.saveRate = async function () {
     }
 
     try {
-alert("Before Save");
+      
         await set(ref(db, "exchangeRates/" + wallet), {
 
             wallet: wallet,
@@ -31,7 +31,7 @@ alert("Before Save");
             updatedAt: new Date().toLocaleString()
 
         });
-      alert("After Save");
+      
       showRate({
     buyRate: Number(buyRate),
     sellRate: Number(sellRate),
