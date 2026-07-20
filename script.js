@@ -1,3 +1,4 @@
+let currentRate = 122;
 // ===================================
 // TS Dollar Exchange
 // script.js Part 1
@@ -24,7 +25,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const sendAmount = document.querySelector('input[placeholder="Amount"]');
 const receiveAmount = document.querySelector('input[placeholder="Receive Amount"]');
 
-const rate = 122;
 
 if (sendAmount && receiveAmount){
 
