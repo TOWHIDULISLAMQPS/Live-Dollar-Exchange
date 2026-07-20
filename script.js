@@ -216,31 +216,6 @@ visitor.innerHTML=total;
 
 
 // ===================================
-// Exchange Rate Auto Change Demo
-// ===================================
-
-setInterval(()=>{
-
-const buy=document.getElementById("payoneerBuy");
-
-const sell=document.getElementById("payoneerSell");
-
-if(buy && sell){
-
-let b=(121+Math.random()*3).toFixed(2);
-
-let s=(123+Math.random()*3).toFixed(2);
-
-buy.innerHTML=b;
-
-sell.innerHTML=s;
-
-}
-
-},10000);
-
-
-// ===================================
 // Notification Popup
 // ===================================
 
