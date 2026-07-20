@@ -1,3 +1,9 @@
+import { db } from "./firebase.js";
+import {
+  ref,
+  onValue
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+
 let currentRate = 0;
 // ===================================
 // TS Dollar Exchange
@@ -709,61 +715,44 @@ setTimeout(()=>{
 showNotification("Welcome to TS Dollar Exchange");
 
 },2000);
-// ===================================
-// Firebase Live Rate Update
-// ===================================
+// ===============================
+// Firebase Live Rate
+// ===============================
 
-
-import("./firebase.js").then((module)=>{
-
-
-const db = module.db;
-
-
-import("https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js")
-.then(({ref,onValue})=>{
-
-
-// Payoneer Rate
-
+// Payoneer
 onValue(ref(db, "exchangeRates/payoneer"), (snapshot) => {
 
-    let data = snapshot.val();
+    if (!snapshot.exists()) return;
 
-    if (data) {
-        document.getElementById("payoneerBuy").innerHTML = data.buyRate;
-        document.getElementById("payoneerSell").innerHTML = data.sellRate;
+    const data = snapshot.val();
 
-        currentRate = Number(data.buyRate);
-    }
+    document.getElementById("payoneerBuy").textContent = data.buyRate;
+    document.getElementById("payoneerSell").textContent = data.sellRate;
+
+    currentRate = Number(data.buyRate);
 
 });
 
-// Wise Rate
-
+// Wise
 onValue(ref(db, "exchangeRates/wise"), (snapshot) => {
 
-    let data = snapshot.val();
+    if (!snapshot.exists()) return;
 
-    if (data) {
+    const data = snapshot.val();
 
-        document.getElementById("wiseBuy").innerHTML = data.buyRate;
-        document.getElementById("wiseSell").innerHTML = data.sellRate;
-
-    }
+    document.getElementById("wiseBuy").textContent = data.buyRate;
+    document.getElementById("wiseSell").textContent = data.sellRate;
 
 });
 
-// USDT Rate
+// USDT
 onValue(ref(db, "exchangeRates/usdt"), (snapshot) => {
 
-    let data = snapshot.val();
+    if (!snapshot.exists()) return;
 
-    if (data) {
+    const data = snapshot.val();
 
-        document.getElementById("usdtBuy").innerHTML = data.buyRate;
-        document.getElementById("usdtSell").innerHTML = data.sellRate;
-
-    }
+    document.getElementById("usdtBuy").textContent = data.buyRate;
+    document.getElementById("usdtSell").textContent = data.sellRate;
 
 });
