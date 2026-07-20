@@ -40,7 +40,7 @@ return;
 
 }
 
-receiveAmount.value=(usd*rate).toFixed(2);
+receiveAmount.value = (usd * currentRate).toFixed(2);
 
 });
 
@@ -720,7 +720,7 @@ import("./firebase.js").then((module)=>{
 const db = module.db;
 
 
-import("https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js")
+import("https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js")
 .then(({ref,onValue})=>{
 
 
