@@ -704,7 +704,27 @@ onValue(ref(db, "exchangeRates/payoneer"), (snapshot) => {
     document.getElementById("payoneerBuy").textContent = data.buyRate;
     document.getElementById("payoneerSell").textContent = data.sellRate;
 
-    currentRate = Number(data.buyRate);
+    let rate = 0;
+
+switch (sendWallet.value) {
+    case "Payoneer USD":
+        rate = Number(document.getElementById("payoneerBuy").innerText);
+        break;
+
+    case "Wise USD":
+        rate = Number(document.getElementById("wiseBuy").innerText);
+        break;
+
+    case "USDT":
+        rate = Number(document.getElementById("usdtBuy").innerText);
+        break;
+
+    case "Skrill":
+        rate = Number(document.getElementById("skrillBuy").innerText);
+        break;
+}
+
+receiveAmount.value = (usd * rate).toFixed(2);
 
 });
 
