@@ -726,77 +726,44 @@ import("https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js")
 
 // Payoneer Rate
 
-onValue(ref(db,"exchangeRates/payoneer"),...
+onValue(ref(db, "exchangeRates/payoneer"), (snapshot) => {
 
+    let data = snapshot.val();
 
-let data=snapshot.val();
+    if (data) {
+        document.getElementById("payoneerBuy").innerHTML = data.buyRate;
+        document.getElementById("payoneerSell").innerHTML = data.sellRate;
 
+        currentRate = Number(data.buyRate);
+    }
 
-if(data){
-
-
-document.getElementById("payoneerBuy").innerHTML = data.buyRate;
-
-document.getElementById("payoneerSell").innerHTML = data.sellRate;
-
-currentRate = Number(data.buyRate);
+});
 
 // Wise Rate
 
-onValue(ref(db,"exchangeRates/wise"),(snapshot)=>{
-data.buyRate
+onValue(ref(db, "exchangeRates/wise"), (snapshot) => {
 
-data.sellRate
+    let data = snapshot.val();
 
-let data=snapshot.val();
+    if (data) {
 
+        document.getElementById("wiseBuy").innerHTML = data.buyRate;
+        document.getElementById("wiseSell").innerHTML = data.sellRate;
 
-if(data){
-
-
-document.getElementById("wiseBuy").innerHTML =
-data.buy;
-
-
-document.getElementById("wiseSell").innerHTML =
-data.sell;
-
-
-}
-
+    }
 
 });
-
-
 
 // USDT Rate
+onValue(ref(db, "exchangeRates/usdt"), (snapshot) => {
 
-onValue(ref(db,"exchangeRates/usdt"),(snapshot)=>{
-data.buyRate
+    let data = snapshot.val();
 
-data.sellRate
+    if (data) {
 
-let data=snapshot.val();
+        document.getElementById("usdtBuy").innerHTML = data.buyRate;
+        document.getElementById("usdtSell").innerHTML = data.sellRate;
 
-
-if(data){
-
-
-document.getElementById("usdtBuy").innerHTML =
-data.buy;
-
-
-document.getElementById("usdtSell").innerHTML =
-data.sell;
-
-
-}
-
-
-});
-
-
-});
-
+    }
 
 });
