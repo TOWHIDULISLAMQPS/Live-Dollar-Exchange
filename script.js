@@ -18,12 +18,6 @@ function updateCurrentRate() {
 
 }
 
-sendWallet.addEventListener("change", () => {
-
-    updateCurrentRate();
-
-});
-
 updateCurrentRate();
 
 sendWallet.addEventListener("change", () => {
