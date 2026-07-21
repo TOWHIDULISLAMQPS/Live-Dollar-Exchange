@@ -7,9 +7,6 @@ import {
 let currentRate = 0;
 const sendWallet = document.getElementById("sendWallet");
 
-function loadRate(wallet) {
-
-  const walletRef = ref(db, "exchangeRates/" + wallet);
 
   onValue(walletRef, (snapshot) => {
 
@@ -723,6 +720,9 @@ onValue(ref(db, "exchangeRates/payoneer"), (snapshot) => {
 
     document.getElementById("payoneerBuy").textContent = data.buyRate;
     document.getElementById("payoneerSell").textContent = data.sellRate;
+
+});
+  
 function loadRate(wallet) {
   });
 
