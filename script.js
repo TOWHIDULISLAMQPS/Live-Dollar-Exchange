@@ -28,17 +28,9 @@ function loadRate(wallet) {
 loadRate("payoneer");
 
 sendWallet.addEventListener("change", () => {
-
-  let wallet = sendWallet.value.toLowerCase();
-
-  if (wallet.includes("payoneer")) wallet = "payoneer";
-  else if (wallet.includes("wise")) wallet = "wise";
-  else if (wallet.includes("usdt")) wallet = "usdt";
-  else if (wallet.includes("skrill")) wallet = "skrill";
-
-  loadRate(wallet);
-
+    loadRate(sendWallet.value);
 });
+
 // ===================================
 // TS Dollar Exchange
 // Smooth Scroll
@@ -74,12 +66,6 @@ if(isNaN(usd)){
 receiveAmount.value="";
 
 return;
-
-}
-
-receiveAmount.value = (usd * currentRate).toFixed(2);
-
-});
 
 }
 
