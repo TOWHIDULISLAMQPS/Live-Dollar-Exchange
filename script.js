@@ -68,8 +68,6 @@ if (sendAmount && receiveAmount) {
 
 }
 
-// Navbar Shadow
-
 window.addEventListener("scroll",()=>{
 
 const navbar=document.querySelector(".navbar");
