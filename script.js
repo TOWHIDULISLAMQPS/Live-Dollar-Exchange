@@ -734,31 +734,29 @@ onValue(ref(db, "exchangeRates/payoneer"), (snapshot) => {
 
     document.getElementById("payoneerBuy").textContent = data.buyRate;
     document.getElementById("payoneerSell").textContent = data.sellRate;
+function loadRate(wallet) {
 
-    let rate = 0;
+    const walletRef = ref(db, "exchangeRates/" + wallet);
 
-switch (sendWallet.value) {
-    case "Payoneer USD":
-        rate = Number(document.getElementById("payoneerBuy").innerText);
-        break;
+    onValue(walletRef, (snapshot) => {
 
-    case "Wise USD":
-        rate = Number(document.getElementById("wiseBuy").innerText);
-        break;
+        if (snapshot.exists()) {
 
-    case "USDT":
-        rate = Number(document.getElementById("usdtBuy").innerText);
-        break;
+            const data = snapshot.val();
 
-    case "Skrill":
-        rate = Number(document.getElementById("skrillBuy").innerText);
-        break;
+            currentRate = Number(data.buyRate);
+
+            if (sendAmount.value) {
+                receiveAmount.value = (
+                    Number(sendAmount.value) * currentRate
+                ).toFixed(2);
+            }
+
+        }
+
+    });
+
 }
-
-receiveAmount.value = (usd * rate).toFixed(2);
-
-});
-
 // Wise
 onValue(ref(db, "exchangeRates/wise"), (snapshot) => {
 
