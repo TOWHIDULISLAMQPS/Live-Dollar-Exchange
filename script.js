@@ -6,26 +6,23 @@ import {
 
 let currentRate = 0;
 
-const sendWallet = document.getElementById("sendWallet");
+function updateCurrentRate() {
 
-function loadRate(wallet){
+    const wallet = sendWallet.value;
 
-    const walletRef = ref(db, "exchangeRates/" + wallet);
-
-    onValue(walletRef, (snapshot)=>{
-
-        if(snapshot.exists()){
-
-            const data = snapshot.val();
-            currentRate = Number(data.buyRate);
-
-        }
-
-    });
+    currentRate = Number(
+        document.getElementById(wallet + "Buy").innerText
+    );
 
 }
 
-loadRate("payoneer");
+sendWallet.addEventListener("change", () => {
+
+    updateCurrentRate();
+
+});
+
+updateCurrentRate();
 
 sendWallet.addEventListener("change", () => {
     loadRate(sendWallet.value);
