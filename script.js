@@ -51,24 +51,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const sendAmount = document.querySelector('input[placeholder="Amount"]');
 const receiveAmount = document.querySelector('input[placeholder="Receive Amount"]');
 
-
 if (sendAmount && receiveAmount){
 
 sendAmount.addEventListener("input",()=>{
 
 let usd = parseFloat(sendAmount.value);
 
-if (isNaN(usd)) {
-    receiveAmount.value = "";
-    return;
-}
+if(isNaN(usd)){
 
 receiveAmount.value = (usd * currentRate).toFixed(2);
 
 });
 
 }
-
 
 // Navbar Shadow
 
