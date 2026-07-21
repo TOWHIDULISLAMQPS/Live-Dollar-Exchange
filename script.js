@@ -713,8 +713,10 @@ onValue(ref(db, "exchangeRates/payoneer"), (snapshot) => {
     document.getElementById("payoneerBuy").textContent = data.buyRate;
     document.getElementById("payoneerSell").textContent = data.sellRate;
 
+    updateCurrentRate();
+
 });
-updateCurrentRate();
+
 // Wise
 onValue(ref(db, "exchangeRates/wise"), (snapshot) => {
 
@@ -724,9 +726,12 @@ onValue(ref(db, "exchangeRates/wise"), (snapshot) => {
 
     document.getElementById("wiseBuy").textContent = data.buyRate;
     document.getElementById("wiseSell").textContent = data.sellRate;
+    
+    updateCurrentRate();
 
 });
-updateCurrentRate();
+
+
 // USDT
 onValue(ref(db, "exchangeRates/usdt"), (snapshot) => {
 
@@ -736,9 +741,10 @@ onValue(ref(db, "exchangeRates/usdt"), (snapshot) => {
 
     document.getElementById("usdtBuy").textContent = data.buyRate;
     document.getElementById("usdtSell").textContent = data.sellRate;
+    
+    updateCurrentRate();
 
 });
-updateCurrentRate();
 
 // SKRILL
 onValue(ref(db, "exchangeRates/skrill"), (snapshot) => {
@@ -748,7 +754,8 @@ onValue(ref(db, "exchangeRates/skrill"), (snapshot) => {
     if (data) {
         document.getElementById("skrillBuy").innerHTML = data.buyRate;
         document.getElementById("skrillSell").innerHTML = data.sellRate;
-    }
+  
+    updateCurrentRate();
 
 });
-updateCurrentRate();
+
