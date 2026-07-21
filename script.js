@@ -5,6 +5,40 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
 
 let currentRate = 0;
+const sendWallet = document.getElementById("sendWallet");
+
+function loadRate(wallet) {
+
+  const walletRef = ref(db, "rates/" + wallet);
+
+  onValue(walletRef, (snapshot) => {
+
+    if (snapshot.exists()) {
+
+      const data = snapshot.val();
+
+      currentRate = Number(data.buyRate);
+
+    }
+
+  });
+
+}
+
+loadRate("payoneer");
+
+sendWallet.addEventListener("change", () => {
+
+  let wallet = sendWallet.value.toLowerCase();
+
+  if (wallet.includes("payoneer")) wallet = "payoneer";
+  else if (wallet.includes("wise")) wallet = "wise";
+  else if (wallet.includes("usdt")) wallet = "usdt";
+  else if (wallet.includes("skrill")) wallet = "skrill";
+
+  loadRate(wallet);
+
+});
 // ===================================
 // TS Dollar Exchange
 // script.js Part 1
