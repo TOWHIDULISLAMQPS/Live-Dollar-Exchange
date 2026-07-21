@@ -68,17 +68,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const sendAmount = document.querySelector('input[placeholder="Amount"]');
 const receiveAmount = document.querySelector('input[placeholder="Receive Amount"]');
 
-if (sendAmount && receiveAmount){
+if (sendAmount && receiveAmount) {
 
-sendAmount.addEventListener("input",()=>{
+    sendAmount.addEventListener("input", () => {
 
-let usd = parseFloat(sendAmount.value);
+        let usd = parseFloat(sendAmount.value);
 
-if(isNaN(usd)){
+        if (isNaN(usd)) {
+            receiveAmount.value = "";
+            return;
+        }
 
-receiveAmount.value = (usd * currentRate).toFixed(2);
+        receiveAmount.value = (usd * currentRate).toFixed(2);
 
-});
+    });
 
 }
 
