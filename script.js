@@ -20,9 +20,7 @@ function updateCurrentRate() {
 
 updateCurrentRate();
 
-sendWallet.addEventListener("change", () => {
-    loadRate(sendWallet.value);
-});
+sendWallet.addEventListener("change", updateCurrentRate);
 
 // ===================================
 // TS Dollar Exchange
