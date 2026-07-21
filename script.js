@@ -63,9 +63,9 @@ let usd = parseFloat(sendAmount.value);
 
 if(isNaN(usd)){
 
-receiveAmount.value="";
+receiveAmount.value = (usd * currentRate).toFixed(2);
 
-return;
+});
 
 }
 
@@ -721,6 +721,7 @@ onValue(ref(db, "exchangeRates/payoneer"), (snapshot) => {
     document.getElementById("payoneerBuy").textContent = data.buyRate;
     document.getElementById("payoneerSell").textContent = data.sellRate;
 function loadRate(wallet) {
+  });
 
     const walletRef = ref(db, "exchangeRates/" + wallet);
 
