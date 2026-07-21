@@ -61,7 +61,10 @@ sendAmount.addEventListener("input",()=>{
 
 let usd = parseFloat(sendAmount.value);
 
-if(isNaN(usd)){
+if (isNaN(usd)) {
+    receiveAmount.value = "";
+    return;
+}
 
 receiveAmount.value = (usd * currentRate).toFixed(2);
 
