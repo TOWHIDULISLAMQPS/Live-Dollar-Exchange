@@ -735,10 +735,6 @@ onValue(ref(db, "exchangeRates/payoneer"), (snapshot) => {
 
 });
   
-function loadRate(wallet) {
-  });
-
-    const walletRef = ref(db, "exchangeRates/" + wallet);
 
     onValue(walletRef, (snapshot) => {
 
