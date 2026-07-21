@@ -1,41 +1,27 @@
+import { db } from "./firebase.js";
+import {
+    ref,
+    onValue
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+
+let currentRate = 0;
+
+const sendWallet = document.getElementById("sendWallet");
+
 function loadRate(wallet){
 
     const walletRef = ref(db, "exchangeRates/" + wallet);
 
-    onValue(walletRef,(snapshot)=>{
+    onValue(walletRef, (snapshot)=>{
 
         if(snapshot.exists()){
 
-            const data=snapshot.val();
-
-            currentRate=Number(data.buyRate);
+            const data = snapshot.val();
+            currentRate = Number(data.buyRate);
 
         }
 
     });
-
-}
-import { db } from "./firebase.js";
-import {
-  ref,
-  onValue
-} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
-
-let currentRate = 0;
-const sendWallet = document.getElementById("sendWallet");
-
-
-  onValue(walletRef, (snapshot) => {
-
-    if (snapshot.exists()) {
-
-      const data = snapshot.val();
-
-      currentRate = Number(data.buyRate);
-
-    }
-
-  });
 
 }
 
