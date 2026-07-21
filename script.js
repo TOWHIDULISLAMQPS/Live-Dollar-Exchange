@@ -6,6 +6,8 @@ import {
 
 let currentRate = 0;
 
+const sendWallet = document.getElementById("sendWallet");
+
 function updateCurrentRate() {
 
     const wallet = sendWallet.value;
