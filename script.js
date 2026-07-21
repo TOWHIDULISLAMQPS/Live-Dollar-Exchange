@@ -1,3 +1,20 @@
+function loadRate(wallet){
+
+    const walletRef = ref(db, "exchangeRates/" + wallet);
+
+    onValue(walletRef,(snapshot)=>{
+
+        if(snapshot.exists()){
+
+            const data=snapshot.val();
+
+            currentRate=Number(data.buyRate);
+
+        }
+
+    });
+
+}
 import { db } from "./firebase.js";
 import {
   ref,
