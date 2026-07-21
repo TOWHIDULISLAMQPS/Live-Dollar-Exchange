@@ -724,26 +724,6 @@ onValue(ref(db, "exchangeRates/payoneer"), (snapshot) => {
 
 });
   
-
-    onValue(walletRef, (snapshot) => {
-
-        if (snapshot.exists()) {
-
-            const data = snapshot.val();
-
-            currentRate = Number(data.buyRate);
-
-            if (sendAmount.value) {
-                receiveAmount.value = (
-                    Number(sendAmount.value) * currentRate
-                ).toFixed(2);
-            }
-
-        }
-
-    });
-
-}
 // Wise
 onValue(ref(db, "exchangeRates/wise"), (snapshot) => {
 
