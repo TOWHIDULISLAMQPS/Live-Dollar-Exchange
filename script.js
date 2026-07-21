@@ -9,7 +9,7 @@ const sendWallet = document.getElementById("sendWallet");
 
 function loadRate(wallet) {
 
-  const walletRef = ref(db, "rates/" + wallet);
+  const walletRef = ref(db, "exchangeRates/" + wallet);
 
   onValue(walletRef, (snapshot) => {
 
@@ -41,9 +41,6 @@ sendWallet.addEventListener("change", () => {
 });
 // ===================================
 // TS Dollar Exchange
-// script.js Part 1
-// ===================================
-
 // Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
