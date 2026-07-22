@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Orders | TS Dollar Exchange</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+body{
+background:#f5f7fb;
+font-family:Arial,sans-serif;
+}
+
+.navbar{
+background:#071826;
+}
+
+.navbar-brand{
+color:#00d95f !important;
+font-weight:bold;
+font-size:24px;
+}
+
+.admin-header{
+background:linear-gradient(135deg,#071826,#0b2f47);
+color:#fff;
+padding:60px 20px;
+}
+
+.card{
+border:none;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.stat-card{
+transition:.3s;
+}
+
+.stat-card:hover{
+transform:translateY(-5px);
+}
+
+.stat-icon{
+font-size:42px;
+color:#00d95f;
+}
+
+.table{
+vertical-align:middle;
+}
+
+.badge{
+font-size:14px;
+padding:8px 14px;
+}
+
+.btn-action{
+margin:2px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg">
+
+<div class="container">
+
+<a class="navbar-brand" href="#">
+
+TS Dollar Exchange Admin
+
+</a>
+
+<div class="ms-auto">
+
+<a href="admin.html" class="btn btn-success me-2">
+
+Dashboard
+
+</a>
+
+<button
+id="logoutBtn"
+class="btn btn-danger">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- Header -->
+
+<section class="admin-header">
+
+<div class="container text-center">
+
+<h1 class="fw-bold">
+
+Order Management Dashboard
+
+</h1>
+
+<p class="mt-3">
+
+Manage customer exchange orders, approve payments and release transactions.
+
+</p>
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- Dashboard Statistics -->
+<!-- ========================= -->
+
+<section class="container py-5">
+
+<div class="row g-4">
+
+<div class="col-md-3">
+
+<div class="card stat-card text-center p-4">
+
+<i class="fa-solid fa-list-check stat-icon"></i>
+
+<h2 id="totalOrders" class="mt-3">0</h2>
+
+<p class="text-muted mb-0">Total Orders</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card stat-card text-center p-4">
+
+<i class="fa-solid fa-clock stat-icon text-warning"></i>
+
+<h2 id="pendingOrders" class="mt-3">0</h2>
+
+<p class="text-muted mb-0">Pending Orders</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card stat-card text-center p-4">
+
+<i class="fa-solid fa-circle-check stat-icon text-success"></i>
+
+<h2 id="completedOrders" class="mt-3">0</h2>
+
+<p class="text-muted mb-0">Completed Orders</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card stat-card text-center p-4">
+
+<i class="fa-solid fa-circle-xmark stat-icon text-danger"></i>
+
+<h2 id="cancelledOrders" class="mt-3">0</h2>
+
+<p class="text-muted mb-0">Cancelled Orders</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- Search & Filter -->
+<!-- ========================= -->
+
+<section class="container mb-4">
+
+<div class="card p-4">
+
+<div class="row g-3">
+
+<div class="col-lg-6">
+
+<input
+type="text"
+id="searchOrder"
+class="form-control"
+placeholder="Search by Order ID, Name, Phone or TRX ID">
+
+</div>
+
+<div class="col-lg-3">
+
+<select
+id="statusFilter"
+class="form-select">
+
+<option value="all">All Orders</option>
+
+<option value="Pending">Pending</option>
+
+<option value="Completed">Completed</option>
+
+<option value="Cancelled">Cancelled</option>
+
+</select>
+
+</div>
+
+<div class="col-lg-3">
+
+<button
+id="refreshBtn"
+class="btn btn-success w-100">
+
+<i class="fa-solid fa-rotate"></i>
+
+Refresh Orders
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- Orders Table -->
+<!-- ========================= -->
+
+<section class="container pb-5">
+
+<div class="card shadow-lg">
+
+<div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+
+<h4 class="mb-0">
+
+<i class="fa-solid fa-receipt"></i>
+
+Live Exchange Orders
+
+</h4>
+
+<span class="badge bg-light text-dark" id="liveStatus">
+
+LIVE
+
+</span>
+
+</div>
+
+<div class="table-responsive">
+
+<table class="table table-hover table-bordered align-middle mb-0">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>#</th>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Phone</th>
+
+<th>Wallet</th>
+
+<th>Amount</th>
+
+<th>Receive</th>
+
+<th>TRX ID</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th width="250">
+
+Action
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ordersTable">
+
+<tr>
+
+<td colspan="11" class="text-center py-5">
+
+<i class="fa-solid fa-spinner fa-spin fa-2x text-success mb-3"></i>
+
+<br><br>
+
+Loading Orders...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- Order Details Modal -->
+<!-- ========================= -->
+
+<div class="modal fade"
+
+id="orderModal"
+
+tabindex="-1">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+<div class="modal-header bg-success text-white">
+
+<h5 class="modal-title">
+
+Order Details
+
+</h5>
+
+<button
+
+type="button"
+
+class="btn-close btn-close-white"
+
+data-bs-dismiss="modal">
+
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<strong>Order ID</strong>
+
+<p id="mOrderId">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Customer</strong>
+
+<p id="mCustomer">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Phone</strong>
+
+<p id="mPhone">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Wallet</strong>
+
+<p id="mWallet">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Amount</strong>
+
+<p id="mAmount">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Receive Method</strong>
+
+<p id="mReceiveMethod">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Receive Account</strong>
+
+<p id="mReceiveAccount">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>TRX ID</strong>
+
+<p id="mTrx">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Status</strong>
+
+<p id="mStatus">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Date</strong>
+
+<p id="mDate">-</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+
+class="btn btn-secondary"
+
+data-bs-dismiss="modal">
+
+Close
+
+</button>
+
+<button
+
+id="releaseBtn"
+
+class="btn btn-success">
+
+<i class="fa-solid fa-circle-check"></i>
+
+Release
+
+</button>
+
+<button
+
+id="cancelBtn"
+
+class="btn btn-danger">
+
+<i class="fa-solid fa-ban"></i>
+
+Reject
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- ========================= -->
+<!-- Bootstrap JS -->
+<!-- ========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ========================= -->
+<!-- Admin Orders JS -->
+<!-- ========================= -->
+
+<script type="module" src="admin-orders.js"></script>
+
+<!-- ========================= -->
+<!-- Logout -->
+<!-- ========================= -->
+
+<script>
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+if(logoutBtn){
+
+logoutBtn.addEventListener("click",()=>{
+
+if(confirm("Are you sure you want to logout?")){
+
+window.location.href="login.html";
+
+}
+
+});
+
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- Footer -->
+<!-- ========================= -->
+
+<footer class="bg-dark text-center text-white py-3">
+
+<div class="container">
+
+<p class="mb-0">
+
+© <span id="year"></span> TS Dollar Exchange Admin Panel
+
+</p>
+
+</div>
+
+</footer>
+
+<script>
+
+document.getElementById("year").innerHTML =
+new Date().getFullYear();
+
+</script>
+
+</body>
+</html>
