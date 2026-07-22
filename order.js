@@ -3,42 +3,45 @@ import { db } from "./firebase.js";
 import {
     ref,
     push,
-    set,
-    serverTimestamp
+    set
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
 
-document.getElementById("submitOrder").addEventListener("click", async () => {
+const btn = document.getElementById("submitOrder");
+const message = document.getElementById("message");
+
+btn.addEventListener("click", async () => {
 
     const name = document.getElementById("name").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const wallet = document.getElementById("wallet").value;
-    const amount = Number(document.getElementById("amount").value);
+    const amount = document.getElementById("amount").value;
     const receiveMethod = document.getElementById("receiveMethod").value;
     const receiveAccount = document.getElementById("receiveAccount").value.trim();
     const trxId = document.getElementById("trxId").value.trim();
 
-    const message = document.getElementById("message");
-
     if (
         !name ||
         !phone ||
-        !wallet ||
         !amount ||
         !receiveAccount ||
         !trxId
     ) {
-        message.innerHTML = "❌ Please fill all fields";
+
+        message.innerHTML = "❌ Please fill all fields.";
         message.style.color = "red";
         return;
+
     }
 
     try {
 
         const orderRef = push(ref(db, "orders"));
 
+        const orderId = "TS" + Date.now();
+
         await set(orderRef, {
 
-            orderId: orderRef.key,
+            orderId: orderId,
 
             name: name,
 
@@ -46,7 +49,7 @@ document.getElementById("submitOrder").addEventListener("click", async () => {
 
             wallet: wallet,
 
-            amount: amount,
+            amount: Number(amount),
 
             receiveMethod: receiveMethod,
 
@@ -56,12 +59,16 @@ document.getElementById("submitOrder").addEventListener("click", async () => {
 
             status: "Pending",
 
-            createdAt: serverTimestamp()
+            createdAt: new Date().toLocaleString()
 
         });
 
-        message.innerHTML = "✅ Order Submitted Successfully";
-        message.style.color = "green";
+        message.innerHTML =
+        "✅ Order Submitted Successfully.<br>Your Order ID : <b>" +
+        orderId +
+        "</b>";
+
+        message.style.color = "lime";
 
         document.getElementById("name").value = "";
         document.getElementById("phone").value = "";
@@ -71,9 +78,10 @@ document.getElementById("submitOrder").addEventListener("click", async () => {
 
     } catch (err) {
 
-        console.error(err);
+        console.log(err);
 
-        message.innerHTML = "❌ Failed to submit order";
+        message.innerHTML = "❌ Failed to submit order.";
+
         message.style.color = "red";
 
     }
