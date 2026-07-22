@@ -1,0 +1,64 @@
+<section class="container py-5">
+
+    <h2 class="text-center mb-4">Place Exchange Order</h2>
+
+    <div class="card shadow p-4">
+
+        <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="name" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">WhatsApp Number</label>
+            <input type="text" id="phone" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Send Wallet</label>
+
+            <select id="wallet" class="form-select">
+                <option value="payoneer">Payoneer USD</option>
+                <option value="wise">Wise USD</option>
+                <option value="usdt">USDT</option>
+                <option value="skrill">Skrill</option>
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Send Amount (USD)</label>
+            <input type="number" id="amount" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Receive Method</label>
+
+            <select id="receiveMethod" class="form-select">
+                <option>Bkash</option>
+                <option>Nagad</option>
+                <option>Rocket</option>
+                <option>Bank</option>
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Receive Number / Account</label>
+            <input type="text" id="receiveAccount" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Transaction ID</label>
+            <input type="text" id="trxId" class="form-control">
+        </div>
+
+        <button id="submitOrder" class="btn btn-success w-100">
+            Submit Order
+        </button>
+
+        <div id="message" class="mt-3 text-center"></div>
+
+    </div>
+
+</section>
