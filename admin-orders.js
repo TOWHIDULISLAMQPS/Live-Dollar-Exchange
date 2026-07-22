@@ -363,3 +363,92 @@ document.getElementById("cancelBtn").addEventListener("click", async () => {
     alert("Order Cancelled");
 
 });
+// ======================================
+// Auto Refresh Dashboard
+// ======================================
+
+setInterval(() => {
+
+    renderOrders(allOrders);
+    updateStats(allOrders);
+
+}, 10000);
+
+// ======================================
+// Live Clock
+// ======================================
+
+function updateClock() {
+
+    const clock = document.getElementById("liveStatus");
+
+    if (!clock) return;
+
+    const now = new Date();
+
+    clock.innerHTML =
+        "LIVE • " + now.toLocaleTimeString();
+
+}
+
+setInterval(updateClock, 1000);
+
+updateClock();
+
+// ======================================
+// Logout
+// ======================================
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", () => {
+
+        if (confirm("Are you sure you want to logout?")) {
+
+            window.location.href = "login.html";
+
+        }
+
+    });
+
+}
+
+// ======================================
+// Table Row Animation
+// ======================================
+
+const observer = new MutationObserver(() => {
+
+    document.querySelectorAll("#ordersTable tr").forEach(row => {
+
+        row.style.opacity = "0";
+
+        row.style.transform = "translateY(20px)";
+
+        row.style.transition = ".3s";
+
+        setTimeout(() => {
+
+            row.style.opacity = "1";
+
+            row.style.transform = "translateY(0)";
+
+        }, 100);
+
+    });
+
+});
+
+observer.observe(ordersTable, {
+
+    childList: true
+
+});
+
+// ======================================
+// Console
+// ======================================
+
+console.log("TS Dollar Exchange Admin Orders Loaded Successfully");
