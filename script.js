@@ -747,14 +747,14 @@ onValue(ref(db, "exchangeRates/usdt"), (snapshot) => {
 // SKRILL
 onValue(ref(db, "exchangeRates/skrill"), (snapshot) => {
 
+    if (!snapshot.exists()) return;
+
     const data = snapshot.val();
 
-    if (data) {
-        document.getElementById("skrillBuy").innerHTML = data.buyRate;
-        document.getElementById("skrillSell").innerHTML = data.sellRate;
+    document.getElementById("skrillBuy").textContent = data.buyRate;
+    document.getElementById("skrillSell").textContent = data.sellRate;
 
-        updateCurrentRate();
-    }
+    updateCurrentRate();
 
 });
 
