@@ -74,8 +74,290 @@ Admin Panel
 <option value="skrill">Skrill</option>
 
 </select>
+<!-- ========================= -->
+<!-- Dashboard Statistics -->
+<!-- ========================= -->
 
+<section class="container mt-5">
 
+<h3 class="mb-4 fw-bold">
+
+📊 Dashboard
+
+</h3>
+
+<div class="row g-4">
+
+<div class="col-md-3">
+
+<div class="card shadow border-0 text-center p-4">
+
+<h2 id="totalOrders">0</h2>
+
+<p>Total Orders</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card shadow border-0 text-center p-4">
+
+<h2 id="pendingOrders">0</h2>
+
+<p>Pending Orders</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card shadow border-0 text-center p-4">
+
+<h2 id="completedOrders">0</h2>
+
+<p>Completed Orders</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card shadow border-0 text-center p-4">
+
+<h2 id="cancelledOrders">0</h2>
+
+<p>Cancelled Orders</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- Recent Orders -->
+<!-- ========================= -->
+
+<section class="container mt-5">
+
+<div class="card shadow border-0">
+
+<div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+
+<h4 class="mb-0">
+
+📋 Recent Orders
+
+</h4>
+
+<input
+type="text"
+id="searchOrder"
+class="form-control w-25"
+placeholder="Search Order">
+
+</div>
+
+<div class="table-responsive">
+
+<table class="table table-hover align-middle mb-0">
+
+<thead class="table-success">
+
+<tr>
+
+<th>#</th>
+
+<th>Order ID</th>
+
+<th>Name</th>
+
+<th>Wallet</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ordersTable">
+
+<tr>
+
+<td colspan="7" class="text-center py-5">
+
+No Orders Found
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- Order Details Modal -->
+<!-- ========================= -->
+
+<div class="modal fade" id="orderModal" tabindex="-1">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+<div class="modal-header bg-success text-white">
+
+<h5 class="modal-title">
+
+Order Details
+
+</h5>
+
+<button
+type="button"
+class="btn-close btn-close-white"
+data-bs-dismiss="modal">
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<strong>Order ID</strong>
+
+<p id="mOrderId">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Customer Name</strong>
+
+<p id="mCustomer">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Phone</strong>
+
+<p id="mPhone">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Wallet</strong>
+
+<p id="mWallet">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Amount</strong>
+
+<p id="mAmount">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Receive Method</strong>
+
+<p id="mReceiveMethod">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Receive Account</strong>
+
+<p id="mReceiveAccount">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Transaction ID</strong>
+
+<p id="mTrx">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Status</strong>
+
+<p id="mStatus">-</p>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<strong>Date</strong>
+
+<p id="mDate">-</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Close
+
+</button>
+
+<button
+id="releaseBtn"
+class="btn btn-success">
+
+✅ Release
+
+</button>
+
+<button
+id="cancelBtn"
+class="btn btn-danger">
+
+❌ Reject
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+  
 <input 
 id="buyRate"
 class="form-control"
