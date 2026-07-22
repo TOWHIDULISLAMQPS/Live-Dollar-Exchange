@@ -752,8 +752,9 @@ onValue(ref(db, "exchangeRates/skrill"), (snapshot) => {
     if (data) {
         document.getElementById("skrillBuy").innerHTML = data.buyRate;
         document.getElementById("skrillSell").innerHTML = data.sellRate;
-  
-    updateCurrentRate();
+
+        updateCurrentRate();
+    }
 
 });
 
