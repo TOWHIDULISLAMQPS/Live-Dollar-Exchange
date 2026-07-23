@@ -76,14 +76,11 @@ btn.addEventListener("click", async () => {
         document.getElementById("receiveAccount").value = "";
         document.getElementById("trxId").value = "";
 
-    } catch (err) {
+catch(err){
 
-        console.log(err);
+    console.error(err);
 
-        message.innerHTML = "❌ Failed to submit order.";
+    message.innerHTML = err.message;
+    message.style.color = "red";
 
-        message.style.color = "red";
-
-    }
-
-});
+}
