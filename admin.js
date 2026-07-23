@@ -8,9 +8,9 @@ import {
     update
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
 
-// =====================================
+// ======================================
 // DOM
-// =====================================
+// ======================================
 
 const wallet = document.getElementById("wallet");
 const buyRate = document.getElementById("buyRate");
@@ -30,12 +30,15 @@ const searchOrder = document.getElementById("searchOrder");
 const statusFilter = document.getElementById("statusFilter");
 const refreshBtn = document.getElementById("refreshBtn");
 
-let selectedOrderId = "";
-let ordersData = [];
+const releaseBtn = document.getElementById("releaseBtn");
+const cancelBtn = document.getElementById("cancelBtn");
 
-// =====================================
+let ordersData = [];
+let selectedOrderId = "";
+
+// ======================================
 // SAVE RATE
-// =====================================
+// ======================================
 
 window.saveRate = async function () {
 
@@ -65,11 +68,8 @@ window.saveRate = async function () {
         };
 
         await set(
-
             ref(db, "exchangeRates/" + wallet.value),
-
             data
-
         );
 
         message.innerHTML = "✅ Rate Saved Successfully";
@@ -82,7 +82,7 @@ window.saveRate = async function () {
 
     catch (error) {
 
-        console.log(error);
+        console.error(error);
 
         message.innerHTML = "❌ Save Failed";
         message.style.color = "red";
@@ -91,18 +91,16 @@ window.saveRate = async function () {
 
 };
 
-// =====================================
+// ======================================
 // LOAD RATE
-// =====================================
+// ======================================
 
 async function loadRate() {
 
     try {
 
         const snapshot = await get(
-
             ref(db, "exchangeRates/" + wallet.value)
-
         );
 
         if (snapshot.exists()) {
@@ -121,7 +119,6 @@ async function loadRate() {
 
             buyRate.value = "";
             sellRate.value = "";
-
             lastUpdate.innerHTML = "";
 
         }
@@ -130,7 +127,7 @@ async function loadRate() {
 
     catch (error) {
 
-        console.log(error);
+        console.error(error);
 
     }
 
@@ -140,10 +137,10 @@ wallet.addEventListener("change", loadRate);
 
 loadRate();
 
-console.log("Admin JS Part 1 Loaded");
-// =====================================
-// DASHBOARD + LIVE ORDERS
-// =====================================
+console.log("✅ Part 1 Loaded");
+// ======================================
+// LOAD ORDERS FROM FIREBASE
+// ======================================
 
 const ordersRef = ref(db, "orders");
 
@@ -151,51 +148,29 @@ onValue(ordersRef, (snapshot) => {
 
     ordersData = [];
 
-    ordersTable.innerHTML = "";
+    if (snapshot.exists()) {
 
-    let total = 0;
-    let pending = 0;
-    let completed = 0;
-    let cancelled = 0;
+        snapshot.forEach((child) => {
 
-    if (!snapshot.exists()) {
+            ordersData.push({
 
-        ordersTable.innerHTML = `
-        <tr>
-            <td colspan="8" class="text-center py-4">
-                No Orders Found
-            </td>
-        </tr>`;
+                id: child.key,
 
-        totalOrders.innerHTML = 0;
-        pendingOrders.innerHTML = 0;
-        completedOrders.innerHTML = 0;
-        cancelledOrders.innerHTML = 0;
+                ...child.val()
 
-        return;
-    }
+            });
 
-    snapshot.forEach((child) => {
-
-        const id = child.key;
-
-        const order = child.val();
-
-        ordersData.push({
-            id,
-            ...order
         });
 
-    });
+    }
 
     renderOrders();
 
 });
 
-
-// =====================================
-// RENDER TABLE
-// =====================================
+// ======================================
+// RENDER ORDERS TABLE
+// ======================================
 
 function renderOrders() {
 
@@ -210,7 +185,7 @@ function renderOrders() {
 
     if (searchOrder) {
 
-        keyword = searchOrder.value.toLowerCase();
+        keyword = searchOrder.value.toLowerCase().trim();
 
     }
 
@@ -222,7 +197,25 @@ function renderOrders() {
 
     }
 
-    let count = 1;
+    if (ordersData.length === 0) {
+
+        ordersTable.innerHTML = `
+
+        <tr>
+
+            <td colspan="8" class="text-center py-4">
+
+                No Orders Available
+
+            </td>
+
+        </tr>
+
+        `;
+
+    }
+
+    let serial = 1;
 
     ordersData.forEach((order) => {
 
@@ -244,9 +237,122 @@ function renderOrders() {
             return;
         }
 
-       // =====================================
+        if (filter !== "all" && status !== filter) {
+
+            return;
+
+        }
+
+        let badge = "warning";
+
+        if (status === "Released") badge = "success";
+
+        if (status === "Rejected") badge = "danger";
+
+        ordersTable.innerHTML += `
+
+<tr>
+
+<td>${serial++}</td>
+
+<td>${order.id}</td>
+
+<td>${order.name || "-"}</td>
+
+<td>${order.wallet || "-"}</td>
+
+<td>${order.amount || "-"}</td>
+
+<td>
+
+<span class="badge bg-${badge}">
+
+${status}
+
+</span>
+
+</td>
+
+<td>${order.date || "-"}</td>
+
+<td>
+
+<button
+
+class="btn btn-primary btn-sm"
+
+onclick="viewOrder('${order.id}')">
+
+View
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+    });
+
+    totalOrders.innerHTML = total;
+
+    pendingOrders.innerHTML = pending;
+
+    completedOrders.innerHTML = completed;
+
+    cancelledOrders.innerHTML = cancelled;
+
+}
+
+console.log("✅ Part 2 Loaded");
+// ======================================
+// SEARCH
+// ======================================
+
+if (searchOrder) {
+
+    searchOrder.addEventListener("input", () => {
+
+        renderOrders();
+
+    });
+
+}
+
+// ======================================
+// STATUS FILTER
+// ======================================
+
+if (statusFilter) {
+
+    statusFilter.addEventListener("change", () => {
+
+        renderOrders();
+
+    });
+
+}
+
+// ======================================
+// REFRESH BUTTON
+// ======================================
+
+if (refreshBtn) {
+
+    refreshBtn.addEventListener("click", () => {
+
+        loadRate();
+
+        renderOrders();
+
+    });
+
+}
+
+// ======================================
 // VIEW ORDER
-// =====================================
+// ======================================
 
 window.viewOrder = function (id) {
 
@@ -275,11 +381,10 @@ window.viewOrder = function (id) {
 
 };
 
-// =====================================
+console.log("✅ Part 3 Loaded");
+// ======================================
 // RELEASE ORDER
-// =====================================
-
-const releaseBtn = document.getElementById("releaseBtn");
+// ======================================
 
 if (releaseBtn) {
 
@@ -302,11 +407,11 @@ if (releaseBtn) {
                 document.getElementById("orderModal")
             ).hide();
 
-        } catch (err) {
+        } catch (error) {
 
-            console.log(err);
+            console.error(error);
 
-            alert("Release Failed");
+            alert("❌ Failed to Release Order");
 
         }
 
@@ -314,11 +419,9 @@ if (releaseBtn) {
 
 }
 
-// =====================================
+// ======================================
 // REJECT ORDER
-// =====================================
-
-const cancelBtn = document.getElementById("cancelBtn");
+// ======================================
 
 if (cancelBtn) {
 
@@ -341,11 +444,11 @@ if (cancelBtn) {
                 document.getElementById("orderModal")
             ).hide();
 
-        } catch (err) {
+        } catch (error) {
 
-            console.log(err);
+            console.error(error);
 
-            alert("Reject Failed");
+            alert("❌ Failed to Reject Order");
 
         }
 
@@ -353,20 +456,9 @@ if (cancelBtn) {
 
 }
 
-console.log("Admin JS Part 3 Loaded");
-// =====================================
-// AUTO REFRESH
-// =====================================
-
-setInterval(() => {
-
-    renderOrders();
-
-}, 10000);
-
-// =====================================
-// LIVE STATUS
-// =====================================
+// ======================================
+// LIVE CLOCK
+// ======================================
 
 const liveStatus = document.getElementById("liveStatus");
 
@@ -374,10 +466,8 @@ function updateLiveClock() {
 
     if (!liveStatus) return;
 
-    const now = new Date();
-
     liveStatus.innerHTML =
-        "🟢 LIVE • " + now.toLocaleTimeString();
+        "🟢 LIVE • " + new Date().toLocaleTimeString();
 
 }
 
@@ -385,9 +475,19 @@ updateLiveClock();
 
 setInterval(updateLiveClock, 1000);
 
-// =====================================
-// INITIALIZE
-// =====================================
+// ======================================
+// AUTO REFRESH
+// ======================================
+
+setInterval(() => {
+
+    renderOrders();
+
+}, 10000);
+
+// ======================================
+// PAGE LOAD
+// ======================================
 
 window.addEventListener("load", () => {
 
@@ -397,43 +497,4 @@ window.addEventListener("load", () => {
 
 });
 
-// =====================================
-// GLOBAL ERROR
-// =====================================
-
-window.addEventListener("error", (e) => {
-
-    console.error("Admin Error :", e.message);
-
-});
-
-// =====================================
-// FIREBASE CONNECTION CHECK
-// =====================================
-
-get(ref(db, ".info/connected"))
-
-.then((snapshot) => {
-
-    if (snapshot.exists()) {
-
-        console.log("Firebase Connected");
-
-    }
-
-})
-
-.catch((err) => {
-
-    console.log(err);
-
-});
-
-// =====================================
-// END
-// =====================================
-
-console.log("================================");
-console.log("TS Dollar Exchange Admin Loaded");
-console.log("Version : 1.0");
-console.log("================================");
+console.log("✅ TS Dollar Exchange Admin Loaded Successfully");
