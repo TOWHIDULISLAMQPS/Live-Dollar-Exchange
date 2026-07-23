@@ -1,4 +1,3 @@
-console.log("Order JS Loaded");
 import { db } from "./firebase.js";
 
 import {
