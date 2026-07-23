@@ -388,7 +388,7 @@ if (releaseBtn) {
         try {
 
             await update(
-                ref(db, "orders/" + selectedOrderId),
+               ref(db, "orders/" + order.firebaseKey)
                 {
                     status: "Released"
                 }
@@ -425,7 +425,7 @@ if (cancelBtn) {
         try {
 
             await update(
-                ref(db, "orders/" + selectedOrderId),
+                ref(db, "orders/" + order.firebaseKey)
                 {
                     status: "Rejected"
                 }
