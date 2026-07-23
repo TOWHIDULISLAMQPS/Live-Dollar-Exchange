@@ -39,29 +39,29 @@ btn.addEventListener("click", async () => {
 
         const orderId = "TS" + Date.now();
 
-        await set(orderRef, {
+    await set(orderRef, {
 
-            orderId: orderId,
+    orderId: orderId,
 
-            name: name,
+    name: name,
 
-            phone: phone,
+    phone: phone,
 
-            wallet: wallet,
+    wallet: wallet,
 
-            amount: Number(amount),
+    amount: Number(amount),
 
-            receiveMethod: receiveMethod,
+    receiveMethod: receiveMethod,
 
-            receiveAccount: receiveAccount,
+    receiveAccount: receiveAccount,
 
-            trxId: trxId,
+    trxId: trxId,
 
-            status: "Pending",
+    status: "Pending",
 
-            createdAt: new Date().toLocaleString()
+    date: new Date().toLocaleString()
 
-        });
+});
 
         message.innerHTML =
         "✅ Order Submitted Successfully.<br>Your Order ID : <b>" +
