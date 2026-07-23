@@ -10,58 +10,291 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
 body{
-    background:#071826;
-    font-family:Poppins,Arial;
+
+background:#071826;
+
+padding:30px;
+
 }
 
-.admin-box{
-    max-width:600px;
-    margin:40px auto;
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 10px 40px rgba(0,0,0,.3);
+.wrapper{
+
+max-width:1200px;
+
+margin:auto;
+
 }
 
-h2{
-    text-align:center;
-    color:#0d6efd;
-    margin-bottom:30px;
+.top-header{
+
+background:#0d6efd;
+
+color:#fff;
+
+padding:20px 30px;
+
+border-radius:15px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
 }
 
-input,select{
-    height:50px;
-    margin-bottom:15px;
+.top-header h2{
+
+margin:0;
+
+font-weight:700;
+
+}
+
+.live{
+
+background:#16a34a;
+
+padding:8px 15px;
+
+border-radius:30px;
+
+font-size:14px;
+
+}
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+margin-bottom:25px;
+
+}
+
+.card-box{
+
+background:#fff;
+
+border-radius:15px;
+
+padding:25px;
+
+text-align:center;
+
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+
+}
+
+.card-box h2{
+
+color:#0d6efd;
+
+font-size:35px;
+
+margin-bottom:10px;
+
+}
+
+.card-box p{
+
+margin:0;
+
+font-size:15px;
+
+font-weight:600;
+
+}
+
+.main-card{
+
+background:#fff;
+
+border-radius:15px;
+
+padding:25px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+
+margin-bottom:25px;
+
+}
+
+.section-title{
+
+font-size:22px;
+
+font-weight:700;
+
+margin-bottom:20px;
+
+}
+
+input,
+select{
+
+height:50px!important;
+
+margin-bottom:15px;
+
 }
 
 .btn-save{
-    width:100%;
-    height:50px;
-    font-size:18px;
+
+height:50px;
+
+font-size:17px;
+
+font-weight:600;
+
+width:100%;
+
+}
+
+.table th{
+
+white-space:nowrap;
+
+}
+
+@media(max-width:991px){
+
+.dashboard{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:576px){
+
+body{
+
+padding:15px;
+
+}
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+.top-header{
+
+flex-direction:column;
+
+gap:15px;
+
+text-align:center;
+
+}
+
 }
 
 </style>
 
 </head>
 
-
 <body>
 
+<div class="wrapper">
 
-<div class="admin-box">
+<div class="top-header">
+
+<div>
 
 <h2>
-TS Dollar Exchange
-<br>
-Admin Panel
+
+TS Dollar Exchange Admin
+
 </h2>
 
+<p class="mb-0">
 
-<h5>Update Exchange Rate</h5>
+Professional Admin Dashboard
 
+</p>
+
+</div>
+
+<div class="live" id="liveStatus">
+
+LIVE
+
+</div>
+
+</div>
+<!-- ========================= -->
+<!-- Dashboard Statistics -->
+<!-- ========================= -->
+
+<div class="dashboard">
+
+    <div class="card-box">
+        <h2 id="totalOrders">0</h2>
+        <p>Total Orders</p>
+    </div>
+
+    <div class="card-box">
+        <h2 id="pendingOrders">0</h2>
+        <p>Pending Orders</p>
+    </div>
+
+    <div class="card-box">
+        <h2 id="completedOrders">0</h2>
+        <p>Completed Orders</p>
+    </div>
+
+    <div class="card-box">
+        <h2 id="cancelledOrders">0</h2>
+        <p>Cancelled Orders</p>
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- Exchange Rate Management -->
+<!-- ========================= -->
+
+<div class="main-card">
+
+<h3 class="section-title">
+💱 Exchange Rate Management
+</h3>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<label class="form-label fw-bold">
+Wallet
+</label>
 
 <select id="wallet" class="form-select">
 
@@ -74,122 +307,166 @@ Admin Panel
 <option value="skrill">Skrill</option>
 
 </select>
-<!-- ========================= -->
-<!-- Dashboard Statistics -->
-<!-- ========================= -->
 
-<section class="container mt-5">
+</div>
 
-<h3 class="mb-4 fw-bold">
+<div class="col-md-4">
 
-📊 Dashboard
+<label class="form-label fw-bold">
+Buy Rate
+</label>
 
-</h3>
+<input
+id="buyRate"
+type="number"
+class="form-control"
+placeholder="Enter Buy Rate">
 
-<div class="row g-4">
+</div>
 
-<div class="col-md-3">
+<div class="col-md-4">
 
-<div class="card shadow border-0 text-center p-4">
+<label class="form-label fw-bold">
+Sell Rate
+</label>
 
-<h2 id="totalOrders">0</h2>
-
-<p>Total Orders</p>
+<input
+id="sellRate"
+type="number"
+class="form-control"
+placeholder="Enter Sell Rate">
 
 </div>
 
 </div>
 
-<div class="col-md-3">
+<div class="row mt-3">
 
-<div class="card shadow border-0 text-center p-4">
+<div class="col-md-12">
 
-<h2 id="pendingOrders">0</h2>
+<button
+onclick="saveRate()"
+class="btn btn-success btn-save">
 
-<p>Pending Orders</p>
+<i class="fa-solid fa-floppy-disk"></i>
 
-</div>
+Save Exchange Rate
 
-</div>
-
-<div class="col-md-3">
-
-<div class="card shadow border-0 text-center p-4">
-
-<h2 id="completedOrders">0</h2>
-
-<p>Completed Orders</p>
+</button>
 
 </div>
 
 </div>
 
-<div class="col-md-3">
+<div class="row mt-3">
 
-<div class="card shadow border-0 text-center p-4">
+<div class="col-md-6">
 
-<h2 id="cancelledOrders">0</h2>
+<p id="message" class="fw-bold mb-0"></p>
 
-<p>Cancelled Orders</p>
+</div>
+
+<div class="col-md-6 text-md-end">
+
+<p id="lastUpdate" class="text-secondary mb-0"></p>
 
 </div>
 
 </div>
 
 </div>
-
-</section>
 <!-- ========================= -->
 <!-- Recent Orders -->
 <!-- ========================= -->
 
-<section class="container mt-5">
+<div class="main-card">
 
-<div class="card shadow border-0">
+    <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
 
-<div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <h3 class="section-title mb-3 mb-md-0">
+            📋 Recent Orders
+        </h3>
 
-<h4 class="mb-0">
+        <div class="d-flex gap-2 flex-wrap">
 
-📋 Recent Orders
+            <input
+                type="text"
+                id="searchOrder"
+                class="form-control"
+                placeholder="Search by Name / Order ID"
+                style="width:250px;">
 
-</h4>
+            <select
+                id="statusFilter"
+                class="form-select"
+                style="width:180px;">
 
-<input
-type="text"
-id="searchOrder"
-class="form-control w-25"
-placeholder="Search Order">
+                <option value="all">All Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+
+            </select>
+
+            <button
+                id="refreshBtn"
+                class="btn btn-primary">
+
+                <i class="fa-solid fa-rotate-right"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table table-striped table-hover align-middle">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>Order ID</th>
+
+                    <th>Name</th>
+
+                    <th>Wallet</th>
+
+                    <th>Amount</th>
+
+                    <th>Status</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="ordersTable">
+
+                <tr>
+
+                    <td colspan="8" class="text-center py-5">
+
+                        No Orders Available
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
-
-<div class="table-responsive">
-
-<table class="table table-hover align-middle mb-0">
-
-<thead class="table-success">
-
-<tr>
-
-<th>#</th>
-
-<th>Order ID</th>
-
-<th>Name</th>
-
-<th>Wallet</th>
-
-<th>Amount</th>
-
-<th>Status</th>
-
-<th>Action</th>
-
-</tr>
-
-
-
-</section>
 <!-- ========================= -->
 <!-- Order Details Modal -->
 <!-- ========================= -->
@@ -200,12 +477,10 @@ placeholder="Search Order">
 
 <div class="modal-content">
 
-<div class="modal-header bg-success text-white">
+<div class="modal-header bg-primary text-white">
 
 <h5 class="modal-title">
-
 Order Details
-
 </h5>
 
 <button
@@ -221,83 +496,53 @@ data-bs-dismiss="modal">
 <div class="row">
 
 <div class="col-md-6 mb-3">
-
 <strong>Order ID</strong>
-
 <p id="mOrderId">-</p>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <strong>Customer Name</strong>
-
 <p id="mCustomer">-</p>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <strong>Phone</strong>
-
 <p id="mPhone">-</p>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <strong>Wallet</strong>
-
 <p id="mWallet">-</p>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <strong>Amount</strong>
-
 <p id="mAmount">-</p>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <strong>Receive Method</strong>
-
 <p id="mReceiveMethod">-</p>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <strong>Receive Account</strong>
-
 <p id="mReceiveAccount">-</p>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <strong>Transaction ID</strong>
-
 <p id="mTrx">-</p>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <strong>Status</strong>
-
 <p id="mStatus">-</p>
-
 </div>
 
 <div class="col-md-6 mb-3">
-
 <strong>Date</strong>
-
 <p id="mDate">-</p>
-
 </div>
 
 </div>
@@ -318,7 +563,8 @@ Close
 id="releaseBtn"
 class="btn btn-success">
 
-✅ Release
+<i class="fa-solid fa-circle-check"></i>
+Release
 
 </button>
 
@@ -326,7 +572,8 @@ class="btn btn-success">
 id="cancelBtn"
 class="btn btn-danger">
 
-❌ Reject
+<i class="fa-solid fa-ban"></i>
+Reject
 
 </button>
 
@@ -337,55 +584,13 @@ class="btn btn-danger">
 </div>
 
 </div>
-  
-<input 
-id="buyRate"
-class="form-control"
-type="number"
-placeholder="Buy Rate">
-
-
-<input 
-id="sellRate"
-class="form-control"
-type="number"
-placeholder="Sell Rate">
-
-<button 
-class="btn btn-primary btn-save"
-onclick="saveRate()">
-
-Save Rate
-
-</button>
-
-<p id="message" class="text-center mt-3"></p>
-<p id="lastUpdate" class="text-center text-secondary"></p>
-
-</div>
-</thead>
-
-<tbody id="ordersTable">
-
-<tr>
-
-<td colspan="7" class="text-center py-5">
-
-No Orders Found
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
 
 </div>
 
-</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
 <script type="module" src="admin.js"></script>
 
 </body>
-</html>
 
+</html>
